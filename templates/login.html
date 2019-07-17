@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% extends "layout.html" %}
+        {% block content %}
+
+        {% if loginOrNot %}
+            <h1>You've already logged in!</h1>
+        {% else %}
+            <form method="post" action="/login/">
+                <fieldset>
+                    <legend>Please <strong>Login</strong> to enable further requests!</legend>
+                    {% with messages = get_flashed_messages() %}
+                       {% if messages %}
+                          <ul>
+                             {% for message in messages %}
+                             <li><strong>{{ message }}</strong></li>
+                             {% endfor %}
+                          </ul>
+                       {% endif %}
+                    {% endwith %}
+                    <ul>
+                        <li>User: <input name='user'></li>
+                        <li>Key: <input name='key'></li>
+                    </ul><input type='submit' value='Submit'>
+                </fieldset>
+            </form>
+        {% endif %}
+
+        {% endblock %}
+    </body>
+</html>

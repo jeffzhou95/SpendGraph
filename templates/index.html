@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% extends "layout.html" %}
+        {% block content %}
+        <form method="post" action="/">
+            <fieldset>
+                <legend>Type in the person you want to <strong>Search</strong></legend>
+                {% with messages = get_flashed_messages() %}
+                   {% if messages %}
+                      <ul>
+                         {% for message in messages %}
+                         <li><strong>{{ message }}</strong></li>
+                         {% endfor %}
+                      </ul>
+                   {% endif %}
+                {% endwith %}
+                <ul>
+                    <li>First Name: <input name='first'></li>
+                    <li>Last Name: <input name='last'></li>
+                    <li>Email: <input name='email'></li>
+                    <li>Topic: <input name='topic'></li>
+                    <li>Institution: <input name='institution'></li>
+                </ul><input type='submit' value='Submit'>
+            </fieldset>
+        </form>
+        {% endblock %}
+    </body>
+</html>

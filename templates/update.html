@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% extends "layout.html" %}
+        {% block content %}
+        <form method="post" action="/{{ item[21] }}/update/">
+            <fieldset>
+                <legend>Type in information you want to <strong>Update</strong>:</legend>
+                <ul>
+                    <li>First Name: <input name='first' value='{% if item[1] %}{{ item[1] }}{% endif %}'></li>
+                    <li>Last Name: <input name='last' value='{% if item[2] %}{{ item[2] }}{% endif %}'></li>
+                    <li>Email: <input name='email' value='{% if item[0] %}{{ item[0] }}{% endif %}'></li>
+                    <li>Speak Month: <input name='M' value='{% if item[18] %}{{ item[18] }}{% endif %}'></li>
+                    <li>Speak Day: <input name='D' value='{% if item[19] %}{{ item[19] }}{% endif %}'></li>
+                    <li>Speak Year: <input name='Y' value='{% if item[20] %}{{ item[20] }}{% endif %}'></li>
+                    <li>Institution: <input name='institution' value='{% if item[3] %}{{ item[3] }}{% endif %}'></li>
+                    <li>Department: <input name='department' value='{% if item[4] %}{{ item[4] }}{% endif %}'></li>
+                    <li>Address Street: <input name='street' value='{% if item[5] %}{{ item[5] }}{% endif %}'></li>
+                    <li>Address City: <input name='city' value='{% if item[6] %}{{ item[6] }}{% endif %}'></li>
+                    <li>Address State: <input name='state' value='{% if item[7] %}{{ item[7] }}{% endif %}'></li>
+                    <li>Address Zipcode: <input name='zipCode' value='{% if item[8] %}{{ item[8] }}{% endif %}'></li>
+                    <li>Country: <input name='country' value='{% if item[9] %}{{ item[9] }}{% endif %}'></li>
+                    <li>Office Phone: <input name='officePhone' value='{% if item[10] %}{{ item[10] }}{% endif %}'></li>
+                    <li>Mobile Phone: <input name='mobilePhone' value='{% if item[11] %}{{ item[11] }}{% endif %}'></li>
+                    <li>Web Page: <input name='website' value='{% if item[12] %}{{ item[12] }}{% endif %}'></li>
+                    <li>Twitter: <input name='twitter' value='{% if item[14] %}{{ item[14] }}{% endif %}'></li>
+                    <li>Facebook: <input name='facebook' value='{% if item[15] %}{{ item[15] }}{% endif %}'></li>
+                    <li>Topic: <input name='topic' value='{% if item[13] %}{{ item[13] }}{% endif %}'></li>
+                    <li>Requirements: <input name='requirements' value='{% if item[16] %}{{ item[16] }}{% endif %}'></li>
+                    <li>Special Needs: <input name='needs' value='{% if item[17] %}{{ item[17] }}{% endif %}'></li>
+                </ul><input type='submit' value='Submit'>
+            </fieldset>
+        </form>
+        {% endblock %}
+    </body>
+</html>

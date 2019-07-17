@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% extends "layout.html" %}
+        {% block content %}
+        <form method="post" action="/add/">
+            <fieldset>
+                <legend>Type in the person you want to <strong>Add</strong>:</legend>
+                {% with messages = get_flashed_messages() %}
+                   {% if messages %}
+                      <ul>
+                         {% for message in messages %}
+                         <li><strong>{{ message }}</strong></li>
+                         {% endfor %}
+                      </ul>
+                   {% endif %}
+                {% endwith %}
+                <ul>
+                    <li>First Name: <input name='first'></li>
+                    <li>Last Name: <input name='last'></li>
+                    <li>Email: <input name='email'></li>
+                    <li>Speak Month: <input name='M'></li>
+                    <li>Speak Day: <input name='D'></li>
+                    <li>Speak Year: <input name='Y'></li>
+                    <li>Institution: <input name='institution'></li>
+                    <li>Department: <input name='department'></li>
+                    <li>Address Street: <input name='street'></li>
+                    <li>Address City: <input name='city'></li>
+                    <li>Address State: <input name='state'></li>
+                    <li>Address Zipcode: <input name='zipCode'></li>
+                    <li>Country: <input name='country'></li>
+                    <li>Office Phone: <input name='officePhone'></li>
+                    <li>Mobile Phone: <input name='mobilePhone'></li>
+                    <li>Web Page: <input name='website'></li>
+                    <li>Twitter: <input name='twitter'></li>
+                    <li>Facebook: <input name='facebook'></li>
+                    <li>Topic: <input name='topic'></li>
+                    <li>Requirements: <input name='requirements'></li>
+                    <li>Special Needs: <input name='needs'></li>
+                </ul><input type='submit' value='Submit'>
+            </fieldset>
+        </form>
+        {% endblock %}
+    </body>
+</html>
