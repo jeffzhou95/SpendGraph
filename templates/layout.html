@@ -4,25 +4,32 @@
       <title>TLA Query System</title>
       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
       <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='css/favicon.ico') }}"  />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1 class="logo"><a href="{{ url_for('home') }}">TLA Query System</a></h1>
-        <strong><nav>
-          <ul class="menu">
-            <li><a href="{{ url_for('output') }}">Search</a></li>
-            <li><a href="{{ url_for('add') }}">Add</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-          </ul>
-        </nav></strong>
-      </div>
-    </header>
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-    </div>
-  </body>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          <a class="navbar-brand" href="#">Home</a>
+
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-left text-left pr-3">
+              <a class="nav-item nav-link" href="#">City1</span></a>
+              <a class="nav-item nav-link" href="#">City2</a>
+              <a class="nav-item nav-link" href="#">City3</a>
+              <a class="nav-item nav-link" href="#">City4</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
 </html>

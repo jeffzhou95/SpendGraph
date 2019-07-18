@@ -3,24 +3,14 @@
     <body>
         {% extends "layout.html" %}
         {% block content %}
+
+        <h1>This is a welcome page.</h1>
+
         <form method="post" action="/">
             <fieldset>
-                <legend>Type in the person you want to <strong>Search</strong></legend>
-                {% with messages = get_flashed_messages() %}
-                   {% if messages %}
-                      <ul>
-                         {% for message in messages %}
-                         <li><strong>{{ message }}</strong></li>
-                         {% endfor %}
-                      </ul>
-                   {% endif %}
-                {% endwith %}
+                <legend>Enter the Zipcode you want to <strong>Search</strong></legend>
                 <ul>
-                    <li>First Name: <input name='first'></li>
-                    <li>Last Name: <input name='last'></li>
-                    <li>Email: <input name='email'></li>
-                    <li>Topic: <input name='topic'></li>
-                    <li>Institution: <input name='institution'></li>
+                    <li>Zipcode: <input name='zipCode'></li>
                 </ul><input type='submit' value='Submit'>
             </fieldset>
         </form>
