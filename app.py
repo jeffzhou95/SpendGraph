@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect, Response, render_template, url_for, session, flash
-from flask_restful import Api
 
 import matplotlib.pyplot as plt
 import base64
@@ -22,30 +21,30 @@ def output():
 
 @app.route('/', methods=['POST'])
 def foo():
-	zipCode = request.form['zipCode']
+	country = request.form['country']
 	# item = Item.find_by_name(first, last, email, topic, institution)
 	# if item:
 	# 	return render_template("info.html", message=item, count=len(item))
 	# return render_template('index.html')
-	barChart()
+	barChart(country)
 	data_uri = base64.b64encode(open('barChart.png', 'rb').read()).decode('utf-8')
 	bar = 'data:image/png;base64,{0}'.format(data_uri)
 
-	pieChart()
+	pieChart(country)
 	data_uri = base64.b64encode(open('pieChart.png', 'rb').read()).decode('utf-8')
 	pie = 'data:image/png;base64,{0}'.format(data_uri)
 
-	pieChart1()
+	pieChart1(country)
 	data_uri = base64.b64encode(open('pieChart1.png', 'rb').read()).decode('utf-8')
 	pie1 = 'data:image/png;base64,{0}'.format(data_uri)
-	return render_template('country.html', zipCode=zipCode, bar=bar, pie=pie, pie1=pie1)
+	return render_template('country.html', country=country, bar=bar, pie=pie, pie1=pie1)
 
 
-def barChart():
+def barChart(countryName):
 	connection = sqlite3.connect("data.db")
 	cursor = connection.cursor()
-	query = "SELECT * FROM items"
-	result = cursor.execute(query)
+	query = "SELECT * FROM items WHERE city = ?"
+	result = cursor.execute(query, (countryName, ))
 
 	list = result.fetchall()
 
@@ -71,11 +70,11 @@ def barChart():
 	plt.close()
 	connection.close()
 
-def pieChart():
+def pieChart(countryName):
 	connection = sqlite3.connect("data.db")
 	cursor = connection.cursor()
-	query = "SELECT * FROM items"
-	result = cursor.execute(query)
+	query = "SELECT * FROM items WHERE city = ?"
+	result = cursor.execute(query, (countryName, ))
 	list = result.fetchall()
 
 	total = 0
@@ -100,15 +99,15 @@ def pieChart():
 	plt.close()
 	connection.close()
 
-def pieChart1():
+def pieChart1(countryName):
 	connection = sqlite3.connect("data.db")
 	cursor = connection.cursor()
-	query = "SELECT * FROM items"
-	result = cursor.execute(query)
+	query = "SELECT * FROM items WHERE city = ?"
+	result = cursor.execute(query, (countryName, ))
 	list = result.fetchall()
 
 	total = 0
-	sizes = [0, 0, 0, 0]
+	sizes = [0, 0, 0, 0, 0]
 	for transaction in list:
 		total = total + transaction[3]
 		if transaction[2] == 'Entertainment' :
@@ -117,17 +116,20 @@ def pieChart1():
 			sizes[1] = sizes[1] + transaction[3]
 		elif transaction[2] == 'Grocery' :
 			sizes[2] = sizes[2] + transaction[3]
-		else:
+		elif transaction[2] == 'Education':
 			sizes[3] = sizes[3] + transaction[3]
+		else:
+			sizes[4] = sizes[4] + transaction[3]
 
 	sizes[0] = sizes[0] * 100 / total
 	sizes[1] = sizes[1] * 100 / total
 	sizes[2] = sizes[2] * 100 / total
 	sizes[3] = sizes[3] * 100 / total
+	sizes[4] = sizes[4] * 100 / total
 
 
-	labels = 'Entertainment', 'Restaurant', 'Grocery', 'Transportation'
-	colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+	labels = 'Entertainment', 'Restaurant', 'Grocery', 'Education', 'Transportation'
+	colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'darkblue']
 	patches, texts = plt.pie(sizes, colors=colors, shadow=True, startangle=90)
 	plt.legend(patches, labels, loc="best")
 	plt.axis('equal')
