@@ -4,10 +4,20 @@
         {% extends "layout.html" %}
         {% block content %}
 
-        <h1>I Konw the ZipCode you type in is: {{ country }}</h1>
+        <h1>{{ country }}</h1>
 
 
-        <div class="container-fluid">
+<div class="parent-container d-flex">
+        <div class="container-sm">
+          <ul>
+              {% for x in res %}
+                <small><strong>{{ x[0] }}</strong>   {{ x[1] }}%</small>
+                <p></p>
+              {% endfor %}
+          </ul>
+        </div>
+
+        <div class="container-lg">
 
           <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Spend Chart</h1>
 
@@ -37,7 +47,11 @@
             </div>
           </div>
 
+
         </div>
+
+</div>
+
 
         {% endblock %}
     </body>

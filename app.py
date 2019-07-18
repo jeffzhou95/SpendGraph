@@ -26,6 +26,24 @@ def foo():
 	# if item:
 	# 	return render_template("info.html", message=item, count=len(item))
 	# return render_template('index.html')
+	# barChart(country)
+	# data_uri = base64.b64encode(open('barChart.png', 'rb').read()).decode('utf-8')
+	# bar = 'data:image/png;base64,{0}'.format(data_uri)
+	#
+	# pieChart(country)
+	# data_uri = base64.b64encode(open('pieChart.png', 'rb').read()).decode('utf-8')
+	# pie = 'data:image/png;base64,{0}'.format(data_uri)
+	#
+	# pieChart1(country)
+	# data_uri = base64.b64encode(open('pieChart1.png', 'rb').read()).decode('utf-8')
+	# pie1 = 'data:image/png;base64,{0}'.format(data_uri)
+	# return render_template('country.html', country=country, bar=bar, pie=pie, pie1=pie1)
+	return redirect(url_for('show', country=country))
+
+@app.route('/<country>/')
+def show(country):
+	res = edu()
+
 	barChart(country)
 	data_uri = base64.b64encode(open('barChart.png', 'rb').read()).decode('utf-8')
 	bar = 'data:image/png;base64,{0}'.format(data_uri)
@@ -37,7 +55,29 @@ def foo():
 	pieChart1(country)
 	data_uri = base64.b64encode(open('pieChart1.png', 'rb').read()).decode('utf-8')
 	pie1 = 'data:image/png;base64,{0}'.format(data_uri)
-	return render_template('country.html', country=country, bar=bar, pie=pie, pie1=pie1)
+	return render_template('country.html', country=country, bar=bar, pie=pie, pie1=pie1, res=res)
+
+def edu():
+	connection = sqlite3.connect("data.db")
+	cursor = connection.cursor()
+	query = "SELECT city, SUM(amount) as A FROM items WHERE category = 'Education' GROUP BY city ORDER BY A"
+	result = cursor.execute(query)
+	list = result.fetchall()
+
+	order = []
+	total = 0
+	for x in list:
+		order.append(x[0])
+		total += x[1]
+	per = []
+
+	for x in list:
+		per.append(int(x[1] * 100 // total))
+
+	res = zip(order, per)
+
+	connection.close()
+	return res
 
 
 def barChart(countryName):
@@ -137,6 +177,8 @@ def pieChart1(countryName):
 	plt.savefig('pieChart1.png')
 	plt.close()
 	connection.close()
+
+
 
 if __name__ == "__main__":
 	app.run(port=5000, debug=True)
