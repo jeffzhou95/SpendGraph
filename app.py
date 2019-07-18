@@ -11,9 +11,9 @@ import json, datetime
 app = Flask(__name__)
 app.secret_key = 'miaomiao'
 
-# @app.route('/home/')
-# def home():
-# 	return render_template('front.html')
+@app.route('/home/')
+def home():
+	return render_template('map.html')
 
 @app.route('/')
 def output():
