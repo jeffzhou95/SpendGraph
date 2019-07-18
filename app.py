@@ -130,10 +130,10 @@ def pieChart1(countryName):
 
 	labels = 'Entertainment', 'Restaurant', 'Grocery', 'Education', 'Transportation'
 	colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'darkblue']
-	patches, texts = plt.pie(sizes, colors=colors, shadow=True, startangle=90)
-	plt.legend(patches, labels, loc="best")
+	explode = (0, 0, 0, 0.1, 0)
+	plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
+
 	plt.axis('equal')
-	plt.tight_layout()
 	plt.savefig('pieChart1.png')
 	plt.close()
 	connection.close()
