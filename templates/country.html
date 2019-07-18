@@ -6,11 +6,38 @@
 
         <h1>I Konw the ZipCode you type in is: {{ zipCode }}</h1>
 
-        <img src="{{ pie1 }}">
-        <img src="{{ bar }}">
-        <img src="{{ pie }}">
 
+        <div class="container-fluid">
 
+          <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Spend Chart</h1>
+
+          <hr class="mt-2 mb-5">
+
+          <div class="row text-center text-lg-left">
+
+            <div class="col-lg-3 col-lg-4 col-6">
+                    <img class="img-fluid img-thumbnail" src="{{ pie1 }}" alt="">
+                        <div class="caption">
+                            <p>Category</p>
+                        </div>
+
+            </div>
+            <div class="col-lg-3 col-lg-4 col-6">
+                    <img class="img-fluid img-thumbnail" src="{{ bar }}" alt="">
+                    <div class="caption">
+                        <p>Age</p>
+                    </div>
+            </div>
+            <div class="col-lg-3 col-lg-4 col-6">
+                    <img class="img-fluid img-thumbnail" src="{{ pie }}" alt="">
+                    <div class="caption">
+                        <p>Gender</p>
+                    </div>
+
+            </div>
+          </div>
+
+        </div>
 
         {% endblock %}
     </body>
